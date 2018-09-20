@@ -1,5 +1,5 @@
 /* site.css */
-header, foooter {
+header, footer {
     background-color: lightgrey;
     border: solid 1px black;
 /*    font-family: 'Times New Roman', Times, serif; */
@@ -13,4 +13,12 @@ footer {
 body {
     font-family: Segoe UI, Arial, Helvetica, sans-serif;
     font-size: 14px;
+}
+
+#main {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    color: #202020;
+    margin: 20px 0;
+    padding: 5px;
 }
