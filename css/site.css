@@ -15,6 +15,11 @@ body {
     font-size: 14px;
 }
 
+.bordered-image {
+    border: solid 1px #444;
+    border-radius: 2px;
+}
+
 #main {
     border: solid 1px #ccc;
     border-radius: 5px;
@@ -23,16 +28,22 @@ body {
     padding: 5px;
 }
 
-#main label {
+.simple-form {
+    padding: 2px;
+}
+
+.simple-form label {
     font-weight: bold;
 }
 
-#main input[type=text],
-#main select {
+.simple-form input[type=text],
+.simple-form select,
+.simple-form input[type=password],
+.simple-form textarea {
     width: 150px;
 }
 
-#main input[type=submit] {
+.simple-form input[type=submit] {
     background-color: green;
     color: white;
     border-radius: 15px;
