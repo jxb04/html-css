@@ -16,6 +16,9 @@ body {
     background-color: darkgreen;
 }
 
+a {
+    color: green;
+}
 html, body {
     padding: 0;
     margin: 0;
@@ -75,4 +78,14 @@ html, body {
     margin: 0 auto;
     background-color: white;
     padding: 5px;
+}
+
+header nav {
+    float: right;
+    margin-right: 5px;
+}
+
+header nav li {
+    display: inline;
+    font-size: 12px;
 }
