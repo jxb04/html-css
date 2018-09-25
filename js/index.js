@@ -60,4 +60,17 @@ function showItThen(msg, callback) {
 
 showItThen("showItThen called", function () {
     console.log("callback called");
-})
+});
+
+var inGlobal = true;
+
+function testMe() {
+    console.log("testMe(): " + inGlobal);
+
+    var someMsg = "some message";
+    console.log("testMe(): " + someMsg);
+}
+
+//console.log("global: " + someMsg);
+
+testMe();
