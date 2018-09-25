@@ -4,11 +4,14 @@ index.js
 
 "use strict";
 
-var msg = "hello javascript";
-console.log(msg);
+// var msg = "hello javascript";
+// console.log(msg);
 
-var resultsDiv = document.getElementById("results");
-resultsDiv.innerHTML = "<p>This is from JavaScript.</p>";
+// var resultsDiv = document.getElementById("results");
+// resultsDiv.innerHTML = "<p>This is from JavaScript.</p>";
+
+var resultList = $("#resultList");
+resultList.text("This is from jQuery");
 
 // var result = {
 //     name: "jQuery",
