@@ -1,173 +1,189 @@
 /*
 index.js
 */
-$(document).ready(function() {
+$(document).ready(function () {
 
-"use strict";
+    "use strict";
 
-// var msg = "hello javascript";
-// console.log(msg);
+    // var msg = "hello javascript";
+    // console.log(msg);
 
-// var resultsDiv = document.getElementById("results");
-// resultsDiv.innerHTML = "<p>This is from JavaScript.</p>";
+    // var resultsDiv = document.getElementById("results");
+    // resultsDiv.innerHTML = "<p>This is from JavaScript.</p>";
 
-var resultList = $("#resultList");
-resultList.text("This is from jQuery");
+    var resultList = $("#resultList");
+    resultList.text("This is from jQuery");
 
-var toggleButton = $("#toggleButton");
-toggleButton.on("click", function () {
-    resultList.toggle(500);
+    var toggleButton = $("#toggleButton");
+    toggleButton.on("click", function () {
+        resultList.toggle(500);
 
-    if (toggleButton.text() == "Hide") toggleButton.text("Show");
-    else toggleButton.text("Hide");
-});
-
-var listItems = $("header nav li");
-listItems.css("font-weight", "bold");
-listItems.filter(":first").css("font-size", "18px");
-
-// var result = {
-//     name: "jQuery",
-//     language: "JavaScript",
-//     score: 4.5,
-//     showLog: function() {
-
-//     },
-//     owner: {
-//         login: "joelbernasky",
-//         id: 123456
-//     }
-// };
-
-// result.phoneNumber = "123-456-7890";
-
-// console.log(result.phoneNumber);
-
-var results = [{
-    name: "jQuery",
-    language: "JavaScript",
-    score: 4.5,
-    showLog: function() {
-
-    },
-    owner: {
-        login: "joelbernasky",
-        id: 123456
-    }
-}, {
-    name: "jQuery UI",
-    language: "JavaScript",
-    score: 3.5,
-    showLog: function() {
-
-    },
-    owner: {
-        login: "joelbernasky",
-        id: 123456
-    }
-}];
-
-resultList.empty();
-$.each(results, function(i, item) {
-    
-    var newResult = $("<div class='result'>" + 
-       "<div class='title'>" + item.name + "</div>" +
-       "<div>Language: " + item.language + "</div>" +
-       "<div>Owner: " + item.owner.login + "</div>" +
-       "</div>");
-
-    newResult.hover(function () {
-        // make it darker
-        $(this).css("background-color", "lightgray");
-    }, function() {
-        //reverse
-        $(this).css("background-color", "transparent");
+        if (toggleButton.text() == "Hide") toggleButton.text("Show");
+        else toggleButton.text("Hide");
     });
 
-    resultList.append(newResult);
-});
+    var listItems = $("header nav li");
+    listItems.css("font-weight", "bold");
+    listItems.filter(":first").css("font-size", "18px");
 
-// for (var x = 0; x < results.length; x++) {
-//     var result = results[x];
-//     if (result.score > 4) continue;
-//     console.log(result.name);
-// }
+    // var result = {
+    //     name: "jQuery",
+    //     language: "JavaScript",
+    //     score: 4.5,
+    //     showLog: function() {
 
-// console.log(results.length);
-// console.log(results[0].name);
+    //     },
+    //     owner: {
+    //         login: "joelbernasky",
+    //         id: 123456
+    //     }
+    // };
 
-// results.push(result);
-// results.push({
-//     name: "dummy project"
-// })
+    // result.phoneNumber = "123-456-7890";
 
-// console.log("msg is " + typeof(msg));
-// console.log("resultsDiv is " + typeof(resultsDiv));
+    // console.log(result.phoneNumber);
 
-// var none;
-// console.log("none is " + typeof(none));
+    var gitHubSearch = "https://api.github.com/search/repositories?q=jquery+language:javascript&sort=stars";
 
-// var aNumber = 10;
-// console.log("aNumber is " + typeof(aNumber));
+    $.get(gitHubSearch)
+        .success(function(r) {
+        //console.log(r.items.length);
+        displayResults(r.items);
+    })
+    .fail(function(err) {
+        console.log("Failed to query GitHub");
+    })
+    .done(function() {
+        // done
+    });
 
-// var trueFalse = true;
-// console.log("trueFalse is " + typeof(trueFalse));
+    // var results = [{
+    //     name: "jQuery",
+    //     language: "JavaScript",
+    //     score: 4.5,
+    //     showLog: function () {
 
-// // nonexistent = "this shouldn't work";
+    //     },
+    //     owner: {
+    //         login: "joelbernasky",
+    //         id: 123456
+    //     }
+    // }, {
+    //     name: "jQuery UI",
+    //     language: "JavaScript",
+    //     score: 3.5,
+    //     showLog: function () {
 
-// if (!none) {
-//     console.log("none is undefined");
-// }
+    //     },
+    //     owner: {
+    //         login: "joelbernasky",
+    //         id: 123456
+    //     }
+    // }];
 
-// if (aNumber === "10") {
-//     console.log ("10 is 10");
-// }
+    function displayResults(results) {
+        resultList.empty();
+        $.each(results, function (i, item) {
 
-// // function showMsg(msg) {
-// //     console.log("showMsg: " + msg);
-// // }
+            var newResult = $("<div class='result'>" +
+                "<div class='title'>" + item.name + "</div>" +
+                "<div>Language: " + item.language + "</div>" +
+                "<div>Owner: " + item.owner.login + "</div>" +
+                "</div>");
 
-// function showMsg(msg, more) {
-//     if (more) {
-//         console.log("showMsg+:" + msg + more);
-//     } else {
-//         console.log("showMsg+:" + msg);
-//     }
-// }
+            newResult.hover(function () {
+                // make it darker
+                $(this).css("background-color", "lightgray");
+            }, function () {
+                //reverse
+                $(this).css("background-color", "transparent");
+            });
 
-// showMsg("some information");
-// showMsg("more information", " and even more");
+            resultList.append(newResult);
+        });
+    }
 
-// var showIt = function (msg) {
-//     console.log(msg);
-// }
+    // for (var x = 0; x < results.length; x++) {
+    //     var result = results[x];
+    //     if (result.score > 4) continue;
+    //     console.log(result.name);
+    // }
 
-// showIt("some message");
+    // console.log(results.length);
+    // console.log(results[0].name);
 
-// function showItThen(msg, callback) {
-//     showIt(msg);
-//     callback();
-// }
+    // results.push(result);
+    // results.push({
+    //     name: "dummy project"
+    // })
 
-// showItThen("showItThen called", function () {
-//     console.log("callback called");
-// });
+    // console.log("msg is " + typeof(msg));
+    // console.log("resultsDiv is " + typeof(resultsDiv));
 
-// var inGlobal = true;
+    // var none;
+    // console.log("none is " + typeof(none));
 
-// function testMe() {
-//     console.log("testMe(): " + inGlobal);
+    // var aNumber = 10;
+    // console.log("aNumber is " + typeof(aNumber));
 
-//     var someMsg = "some message";
-//     console.log("testMe(): " + someMsg);
+    // var trueFalse = true;
+    // console.log("trueFalse is " + typeof(trueFalse));
 
-//     showItThen("with Closure", function () {
-//         showIt("testMe With Closure(): "+ someMsg);
-//     });
-// }
+    // // nonexistent = "this shouldn't work";
 
-// //console.log("global: " + someMsg);
+    // if (!none) {
+    //     console.log("none is undefined");
+    // }
 
-// testMe();
+    // if (aNumber === "10") {
+    //     console.log ("10 is 10");
+    // }
+
+    // // function showMsg(msg) {
+    // //     console.log("showMsg: " + msg);
+    // // }
+
+    // function showMsg(msg, more) {
+    //     if (more) {
+    //         console.log("showMsg+:" + msg + more);
+    //     } else {
+    //         console.log("showMsg+:" + msg);
+    //     }
+    // }
+
+    // showMsg("some information");
+    // showMsg("more information", " and even more");
+
+    // var showIt = function (msg) {
+    //     console.log(msg);
+    // }
+
+    // showIt("some message");
+
+    // function showItThen(msg, callback) {
+    //     showIt(msg);
+    //     callback();
+    // }
+
+    // showItThen("showItThen called", function () {
+    //     console.log("callback called");
+    // });
+
+    // var inGlobal = true;
+
+    // function testMe() {
+    //     console.log("testMe(): " + inGlobal);
+
+    //     var someMsg = "some message";
+    //     console.log("testMe(): " + someMsg);
+
+    //     showItThen("with Closure", function () {
+    //         showIt("testMe With Closure(): "+ someMsg);
+    //     });
+    // }
+
+    // //console.log("global: " + someMsg);
+
+    // testMe();
 
 });
