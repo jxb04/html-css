@@ -1,6 +1,7 @@
 /*
 index.js
 */
+$(document).ready(function() {
 
 "use strict";
 
@@ -12,6 +13,14 @@ index.js
 
 var resultList = $("#resultList");
 resultList.text("This is from jQuery");
+
+var toggleButton = $("#toggleButton");
+toggleButton.on("click", function () {
+    resultList.toggle(500);
+
+    if (toggleButton.text() == "Hide") toggleButton.text("Show");
+    else toggleButton.text("Hide");
+});
 
 // var result = {
 //     name: "jQuery",
@@ -137,3 +146,5 @@ for (var x = 0; x < results.length; x++) {
 // //console.log("global: " + someMsg);
 
 // testMe();
+
+});
