@@ -43,19 +43,46 @@ $(document).ready(function () {
 
     // console.log(result.phoneNumber);
 
-    var gitHubSearch = "https://api.github.com/search/repositories?q=jquery+language:javascript&sort=stars";
+    $("#gitHubSearchForm").on("submit", function () {
 
-    $.get(gitHubSearch)
-        .success(function(r) {
-        //console.log(r.items.length);
-        displayResults(r.items);
-    })
-    .fail(function(err) {
-        console.log("Failed to query GitHub");
-    })
-    .done(function() {
-        // done
+        var searchPhrase = $("#searchPhrase").val();
+        var useStars = $("useStars").val();
+        var langChoice = $("langChoice").val();
+
+        if (searchPhrase) {
+
+            resultList.text("Performing search.");
+
+            var gitHubSearch = "https://api.github.com/search/repositories?q=" + encodeURIComponent(searchPhrase);
+
+            if (langChoice != "All") {
+                gitHubSearch += "+language:" + encodeURIComponent(langChoice);
+            }
+
+            if (useStars) {
+                gitHubSearch += "&sort=stars";
+            }
+
+ //           var gitHubSearch = jquery+language:javascript&sort=stars";
+
+            $.get(gitHubSearch)
+                .success(function (r) {
+                    //console.log(r.items.length);
+                    displayResults(r.items);
+                })
+                .fail(function (err) {
+                    console.log("Failed to query GitHub");
+                })
+                .done(function () {
+                    // done
+                });
+
+        }
+
+        return false;
     });
+
+
 
     // var results = [{
     //     name: "jQuery",
